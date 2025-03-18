@@ -36,7 +36,7 @@ print(process.memory_info().rss / 1024 ** 2, "[MB]")
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 dirSCOBSPT = "/home/hamazaki/SCOBS-PT/"
 os.chdir(dirSCOBSPT)
-from BSP import BSPTR
+fromDiffBreedimport BSPTR
 
 args = sys.argv
 

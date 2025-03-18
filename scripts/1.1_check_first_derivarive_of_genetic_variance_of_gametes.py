@@ -26,7 +26,7 @@ import os
 ### Set working directory and import local module, BSPT
 dirSCOBSPT = "/Users/hamazaki/GitHub/SCOBS-PT/"
 os.chdir(dirSCOBSPT)
-from BSP import BSPT
+fromDiffBreedimport BSPT
 
 
 
