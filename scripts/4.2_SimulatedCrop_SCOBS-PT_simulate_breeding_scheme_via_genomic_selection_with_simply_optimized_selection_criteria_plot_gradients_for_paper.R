@@ -36,7 +36,7 @@ dirMid <- "midstream/"
 
 
 #### 1.2.1. Setting some parameters related to names of R6 class ####
-scenarioNo <- 2
+scenarioNo <- 1
 simName <- paste0("Scenario_", scenarioNo)
 breederName <- "K. Hamazaki"
 
@@ -554,8 +554,8 @@ for (nGenerationProceed in nGenerationProceeds) {
 
         logitHsSolLast <- logitHsSol[, ncol(logitHsSol)]
 
-        points(x = logitHsSolFirst[1], y = logitHsSolFirst[2], col = 4, pch = 19, cex = 3)
-        points(x = logitHsSolLast[1], y = logitHsSolLast[2], col = 3, pch = 19, cex = 3)
+        points(x = logitHsSolFirst[1], y = logitHsSolFirst[2], col = 4, pch = 19, cex = 6)
+        points(x = logitHsSolLast[1], y = logitHsSolLast[2], col = 3, pch = 19, cex = 6)
       }
 
       par(op)
@@ -633,8 +633,8 @@ for (nGenerationProceed in nGenerationProceeds) {
 
         logitHsSolLast <- logitHsSol[, ncol(logitHsSol)]
 
-        points(x = logitHsSolFirst[1], y = logitHsSolFirst[2], col = 4, pch = 19, cex = 3)
-        points(x = logitHsSolLast[1], y = logitHsSolLast[2], col = 3, pch = 19, cex = 3)
+        points(x = logitHsSolFirst[1], y = logitHsSolFirst[2], col = 4, pch = 19, cex = 6)
+        points(x = logitHsSolLast[1], y = logitHsSolLast[2], col = 3, pch = 19, cex = 6)
       }
       par(op)
       dev.off()
@@ -722,8 +722,8 @@ for (nGenerationProceed in nGenerationProceeds) {
 
         logitHsSolLast <- logitHsSol[, ncol(logitHsSol)]
 
-        points(x = logitHsSolFirst[1], y = logitHsSolFirst[2], col = 4, pch = 19, cex = 3)
-        points(x = logitHsSolLast[1], y = logitHsSolLast[2], col = 3, pch = 19, cex = 3)
+        points(x = logitHsSolFirst[1], y = logitHsSolFirst[2], col = 4, pch = 19, cex = 6)
+        points(x = logitHsSolLast[1], y = logitHsSolLast[2], col = 3, pch = 19, cex = 6)
       }
 
       par(op)
@@ -800,8 +800,8 @@ for (nGenerationProceed in nGenerationProceeds) {
 
         logitHsSolLast <- logitHsSol[, ncol(logitHsSol)]
 
-        points(x = logitHsSolFirst[1], y = logitHsSolFirst[2], col = 4, pch = 19, cex = 3)
-        points(x = logitHsSolLast[1], y = logitHsSolLast[2], col = 3, pch = 19, cex = 3)
+        points(x = logitHsSolFirst[1], y = logitHsSolFirst[2], col = 4, pch = 19, cex = 6)
+        points(x = logitHsSolLast[1], y = logitHsSolLast[2], col = 3, pch = 19, cex = 6)
       }
       par(op)
       dev.off()

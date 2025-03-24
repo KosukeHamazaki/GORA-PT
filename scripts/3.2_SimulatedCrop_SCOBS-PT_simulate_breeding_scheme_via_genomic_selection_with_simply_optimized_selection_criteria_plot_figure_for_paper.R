@@ -34,7 +34,7 @@ dirMid <- "midstream/"
 
 
 #### 1.2.1. Setting some parameters related to names of R6 class ####
-scenarioNo <- 2
+scenarioNo <- 1
 simName <- paste0("Scenario_", scenarioNo)
 breederName <- "K. Hamazaki"
 
@@ -94,8 +94,8 @@ options(stringAsFactors = FALSE)
 # nIterOptimizations <- c(20000, 5000)
 simTypeName <- "RecurrentGS"
 
-nGenerationProceeds <- 1:4
-# nGenerationProceeds <- 4
+# nGenerationProceeds <- 1:4
+nGenerationProceeds <- 4
 
 for (nGenerationProceed in nGenerationProceeds) {
   # nGenerationProceed <- 4      # int(args[1])
@@ -130,8 +130,8 @@ for (nGenerationProceed in nGenerationProceeds) {
   #### 1.5.4. Changing Parameters ####
   if (nGenerationProceed == 4) {
     # nIterOptimizations <- c(200, 100)
-    nIterOptimizations <- 200
-    # nIterOptimizations <- 100
+    # nIterOptimizations <- 200
+    nIterOptimizations <- 100
   } else {
     nIterOptimizations <- 200
   }
@@ -695,6 +695,7 @@ for (nGenerationProceed in nGenerationProceeds) {
                                            color = Strategy),
                              lty = rep(selectTypeLtys2, each = nGenerationProceed + 1),
                              lwd = selectTypeLwds) +
+          ggplot2::theme_bw() +
           ggplot2::facet_wrap(~ SI) +
           ggplot2::scale_color_manual(values = selectTypeCols2) +
           ggplot2::theme(text = element_text(size = 96)) +
@@ -819,6 +820,7 @@ for (nGenerationProceed in nGenerationProceeds) {
                                            color = Strategy),
                              lty = rep(selectTypeLtys2, each = nGenerationProceed + 1),
                              lwd = selectTypeLwds) +
+          ggplot2::theme_bw() +
           ggplot2::facet_wrap(~ SI) +
           ggplot2::scale_color_manual(values = selectTypeCols2) +
           ggplot2::theme(text = element_text(size = 96)) +
@@ -1036,6 +1038,7 @@ for (nGenerationProceed in nGenerationProceeds) {
         pltCdfSplit <- ggplot2::ggplot(data = geneticGainIterSplitDf,
                                        aes(x = Value, group = Strategy,
                                            color = Strategy, linetype = Strategy)) +
+          ggplot2::theme_bw() +
           ggplot2::facet_wrap(~ SI, nrow = 3, ncol = 1) +
           ggplot2::stat_ecdf(pad = TRUE,
                              lwd = selectTypeLwds) +
@@ -1206,6 +1209,7 @@ for (nGenerationProceed in nGenerationProceeds) {
         pltBox <- ggplot2::ggplot(data = geneticGainFinalTenOptDf) +
           ggplot2::geom_boxplot(mapping = aes(x = Strategy, y = Value, fill = Strategy)) +
           facet_wrap(~ SI) +
+          ggplot2::theme_bw() +
           ggplot2::scale_fill_manual(values = selectTypeCols) +
           ggplot2::theme(text = element_text(size = 72)) +
           ggplot2::ylab(label = "Genetic gain")
@@ -1224,6 +1228,7 @@ for (nGenerationProceed in nGenerationProceeds) {
         pltViolin <- ggplot2::ggplot(data = geneticGainFinalTenOptDf) +
           ggplot2::geom_violin(mapping = aes(x = Strategy, y = Value, fill = Strategy)) +
           facet_wrap(~ SI) +
+          ggplot2::theme_bw() +
           ggplot2::scale_fill_manual(values = selectTypeCols) +
           ggplot2::theme(text = element_text(size = 72)) +
           ggplot2::ylab(label = "Genetic gain")
@@ -1249,7 +1254,7 @@ for (nGenerationProceed in nGenerationProceeds) {
         geneticGainFinalTenOptEqDiff <- do.call(what = cbind,
                                                 args = geneticGainFinalTenOptList) -
           do.call(what = cbind, args = geneticGainFinalTenEqList)
-          # matrix(rep(tapply(X = unlist(geneticGainFinalTenEqList), INDEX = rep(1:10, 3), mean), 3), ncol = 3)
+        # matrix(rep(tapply(X = unlist(geneticGainFinalTenEqList), INDEX = rep(1:10, 3), mean), 3), ncol = 3)
         boxplot(geneticGainFinalTenOptEqDiff)
 
         geneticGainFinalTenOptEqImp <- round((do.call(what = cbind,
@@ -1323,6 +1328,7 @@ for (nGenerationProceed in nGenerationProceeds) {
             ggplot2::geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
             ggplot2::geom_boxplot(mapping = aes(x = Strategy, y = Value, fill = Strategy)) +
             facet_wrap(~ SI) +
+            ggplot2::theme_bw() +
             ggplot2::scale_fill_manual(values = selectTypeColsImp) +
             ggplot2::theme(text = element_text(size = 72)) +
             ggplot2::ylab(label = "Improvement from EQ (%)")
@@ -1342,6 +1348,7 @@ for (nGenerationProceed in nGenerationProceeds) {
             ggplot2::geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
             ggplot2::geom_violin(mapping = aes(x = Strategy, y = Value, fill = Strategy)) +
             facet_wrap(~ SI) +
+            ggplot2::theme_bw() +
             ggplot2::scale_fill_manual(values = selectTypeColsImp) +
             ggplot2::theme(text = element_text(size = 72)) +
             ggplot2::ylab(label = "Improvement from EQ (%)")

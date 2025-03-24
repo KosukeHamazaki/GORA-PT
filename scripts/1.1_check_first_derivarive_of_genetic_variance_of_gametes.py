@@ -73,7 +73,7 @@ simTypeName = "RecurrentGS"
 nGenerationProceed = 1      # int(args[1])
 # nIterSimulation = 100       # int(args[2])
 # nIterSimulationUnit = 100
-nGametes = 10000
+nGametes = 50000
 # selectTypeName = "SI1"      # str(args[3]): "SI1"; "SI2"; "SI3"; "SI4"
 # selCriTypeName = "WBV+GVP"  # str(args[4]): "WBV"; "BV+WBV"; "WBV+GVP"; "BV+WBV+GVP"
 
@@ -224,8 +224,12 @@ def generateGametes(haplotype, bsInfoInit, n = 1, sampledForAutoGrad = None, met
                                                haplotype.genoMapDict.values(),
                                                range(len(haplotype.haploValues.values()))):
             
-            if method in [1, 2]:
-                isCrossOver = torch.rand(1) >= 0.5
+            if method <= 2.5:
+                if isinstance(method, int):
+                    isCrossOver = torch.rand(1) >= 0.5
+                else:
+                    isCrossOver = True
+                    
                 if isCrossOver:
                     if bsInfoInit.device == torch.device("mps"):
                         rec0 = np.array(genoMapChr.rec.values).astype("float32").tolist()
@@ -234,8 +238,10 @@ def generateGametes(haplotype, bsInfoInit, n = 1, sampledForAutoGrad = None, met
             
                     rec = torch.tensor(rec0, device = bsInfoInit.device)
                     crossOverProb = rec.clone()
-                    crossOverProb[1:len(rec)] = crossOverProb[1:len(rec)] * 2
-                    if method == 1:
+                    if isinstance(method, int):
+                        crossOverProb[1:len(rec)] = crossOverProb[1:len(rec)] * 2
+                    ## if not isinstance(method, int), crossOverProb --> recombProb
+                    if int(method) == 1:
                         gamHaplo = torch.zeros(len(rec))
                         whichHaploNow = 0
                         for m in range(len(rec)):
@@ -247,7 +253,7 @@ def generateGametes(haplotype, bsInfoInit, n = 1, sampledForAutoGrad = None, met
                                 whichHaploNow = whichHaploNow
                             gamHaplo[m] = haploChr[whichHaploNow, m]
                             
-                    elif method == 2:
+                    elif int(method) == 2:
                         samples = torch.rand(len(crossOverProb), device = bsInfoInit.device)
                         crossOverBool = crossOverProb - samples >= 0
                         crossOverInt = crossOverBool.type(torch.int)
@@ -378,7 +384,7 @@ x = computeDerivGenVarForGametes(bsInfoInit, recombRatesMat,
 
 bsInfoInitNow1 = bsInfoInit.deepcopy()
 st = time.time()
-genVar1 = computeGenVarForGametesSim(bsInfoInitNow1, method = 1, autoGrad = True,
+genVar1 = computeGenVarForGametesSim(bsInfoInitNow1, method = 1.5, autoGrad = True,
                                      popNo = popNo, indNo = indNo, 
                                      traitNo = traitNo, n = nGametes)
 ed = time.time()
@@ -395,12 +401,12 @@ for haploChr, chrName in zip(bsInfoInitNow1.populations[popNo].indsList[indNo].h
 
 
 bsInfoInitNow2 = bsInfoInit.deepcopy()
-st = time.time()
-genVar2 = computeGenVarForGametesSim(bsInfoInitNow2, method = 2, autoGrad = True,
+st2 = time.time()
+genVar2 = computeGenVarForGametesSim(bsInfoInitNow2, method = 2.5, autoGrad = True,
                                      popNo = popNo, indNo = indNo, 
                                      traitNo = traitNo, n = nGametes)
-ed = time.time()
-print(ed - st)
+ed2 = time.time()
+print(ed2 - st2)
 
 genVar2.backward()
 
